@@ -46,8 +46,8 @@ export default class Player extends Entity {
     this.body.setVelocityX(speedX);
     this.body.setVelocityY(speedY);
     this.body.setAngularVelocity(0);
-    this.x = Phaser.Math.Clamp(this.x, 0, this.scene.game.config.width);
-    this.y = Phaser.Math.Clamp(this.y, 0, this.scene.game.config.width);
+    this.x = Phaser.Math.Clamp(this.x, 0, 2000);
+    this.y = Phaser.Math.Clamp(this.y, 0, 1100);
 
   }
 }

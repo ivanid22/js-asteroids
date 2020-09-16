@@ -1,5 +1,6 @@
 import 'phaser';
 import { GameObjects, Math } from 'phaser';
+import Asteroid from '../game/Asteroid';
 import Laser from '../game/Laser';
 import Player from '../game/Player';
 
@@ -32,15 +33,30 @@ export default class GameScene extends Phaser.Scene {
     });
 
     this.playerLasers = new Phaser.GameObjects.Group(this);
+    this.asteroids = new Phaser.GameObjects.Group(this);
+
     this.player = new Player(this, this.game.config.width * 0.5, this.game.config.height * 0.5, 'mantisNoJet');
     this.keys = GameScene.generateKeys(this.input);
     this.cameras.main.startFollow(this.player);
   }
 
+  updateAsteroids() {
+    if(this.asteroids.children.entries.length <= 20) {
+      let asteroidX, asteroidY;
+      let valid = false;
+      while(!valid) {
+        asteroidX = Phaser.Math.Between(1, this.game.config.width);
+        asteroidY = Phaser.Math.Between(1, this.game.config.height);
+        if (Phaser.Math.Distance.Between(asteroidX, asteroidY, this.player.x, this.player.y) > 100) valid = true;
+      }
+      this.asteroids.add(new Asteroid(this, asteroidX, asteroidY));
+    }
+  }
+  
   update() {
     this.player.update();
+    this.updateAsteroids();
     this.lastPlayerLaserShot++;
-    console.log(this.lastPlayerLaserShot);
     this.infoText = `${this.player.body.rotation}`;
     if (this.keys.W.isDown) {
       this.player.thrustForward();
