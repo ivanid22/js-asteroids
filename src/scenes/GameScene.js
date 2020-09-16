@@ -38,9 +38,9 @@ export default class GameScene extends Phaser.Scene {
     this.player.update();
     this.infoText = `${this.player.body.rotation}`;
     if (this.keys.W.isDown) {
-      this.player.moveUp();
+      this.player.thrustForward();
     } else if (this.keys.S.isDown) {
-      this.player.moveDown();
+      this.player.thrustBackward();
     }
 
     if (this.keys.D.isDown) {
