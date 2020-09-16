@@ -22,32 +22,43 @@ export default class Player extends Entity {
     }
   }
 
+  hasCollided() {
+    this.setData('hasCollided', true);
+  }
+
   thrustForward() {
     const currentSpeed = this.getData('speed');
-    if (currentSpeed <= this.getData('maxSpeed')) this.setData('speed', currentSpeed + 2)
+    if (currentSpeed <= this.getData('maxSpeed')) this.setData('speed', currentSpeed + 4)
   }
 
   thrustBackward() {
     const currentSpeed = this.getData('speed');
-    if (currentSpeed >= -this.getData('maxSpeed')) this.setData('speed', currentSpeed - 2);
+    if (currentSpeed >= -this.getData('maxSpeed')) this.setData('speed', currentSpeed - 4);
   }
 
   rotateLeft() {
-    this.body.angularVelocity -= 100;
+    this.body.angularVelocity -= 150;
   }
 
   rotateRight() {
-    this.body.angularVelocity += 100;
+    this.body.angularVelocity += 150;
   }
 
   update() {
-    //this.body.setVelocity(0, 0);
-    const { speedX, speedY  } = Player.calcSpeedComponents(this.rotation - (Math.PI / 2), this.data.get('speed'));
-    this.body.setVelocityX(speedX);
-    this.body.setVelocityY(speedY);
-    this.body.setAngularVelocity(0);
-    this.x = Phaser.Math.Clamp(this.x, 0, 2000);
-    this.y = Phaser.Math.Clamp(this.y, 0, 1100);
-
+    if (this.getData('hasCollided')) {
+      if(!this.getData('hasPlayedDeathAnimation')) { 
+        this.play('explosionAnimation', true);
+        this.setData('hasPlayedDeathAnimation', true);
+      }
+      this.body.setVelocity(0);
+      this.body.setAngularVelocity(0);
+    } else {
+      const { speedX, speedY  } = Player.calcSpeedComponents(this.rotation - (Math.PI / 2), this.data.get('speed'));
+      this.body.setVelocityX(speedX);
+      this.body.setVelocityY(speedY);
+      this.body.setAngularVelocity(0);
+      this.x = Phaser.Math.Clamp(this.x, 0, 2000);
+      this.y = Phaser.Math.Clamp(this.y, 0, 1100);
+    }
   }
 }

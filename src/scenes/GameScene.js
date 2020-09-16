@@ -1,6 +1,6 @@
 import 'phaser';
-import { GameObjects, Math } from 'phaser';
 import Asteroid from '../game/Asteroid';
+import AsteroidChunk from '../game/AsteroidChunk';
 import Laser from '../game/Laser';
 import Player from '../game/Player';
 
@@ -22,8 +22,7 @@ export default class GameScene extends Phaser.Scene {
   create() {
     this.add.image(this.game.config.width * 0.5, this.game.config.height * 0.5, 'gameBg');
     this.lastPlayerLaserShot = 0;
-    
-    console.log(this);
+    this.chunksSpeed = 50;
 
     this.anims.create({
       key: 'mantisAnim',
@@ -32,12 +31,44 @@ export default class GameScene extends Phaser.Scene {
       repeat: true,
     });
 
+    this.anims.create({
+      key: 'explosionAnimation',
+      frames: this.anims.generateFrameNumbers('explosionSprite', {start: 0, end: 10 }),
+      frameRate: 20,
+      repeat: 0,
+    })
+
+    console.log(this.anims)
+
     this.playerLasers = new Phaser.GameObjects.Group(this);
     this.asteroids = new Phaser.GameObjects.Group(this);
+    this.asteroidChunks = new Phaser.GameObjects.Group(this);
 
     this.player = new Player(this, this.game.config.width * 0.5, this.game.config.height * 0.5, 'mantisNoJet');
+    this.player.setScale(0.5, 0.5);
     this.keys = GameScene.generateKeys(this.input);
     this.cameras.main.startFollow(this.player);
+
+    this.physics.add.collider(this.playerLasers, this.asteroids, ((laser, asteroid) => {
+      laser.destroy();
+      this.asteroidChunks.add(new AsteroidChunk(this, asteroid.body.x, asteroid.body.y, 'asteroidChunk', -this.chunksSpeed, this.chunksSpeed));
+      this.asteroidChunks.add(new AsteroidChunk(this, asteroid.body.x, asteroid.body.y, 'asteroidChunk', this.chunksSpeed, this.chunksSpeed));
+      this.asteroidChunks.add(new AsteroidChunk(this, asteroid.body.x, asteroid.body.y, 'asteroidChunk', this.chunksSpeed, -this.chunksSpeed));
+      this.asteroidChunks.add(new AsteroidChunk(this, asteroid.body.x, asteroid.body.y, 'asteroidChunk', -this.chunksSpeed, -this.chunksSpeed));
+      asteroid.goBoom();
+    }).bind(this))
+
+    this.physics.add.collider(this.player, this.asteroids, ((player, asteroid) => {
+      asteroid.goBoom();
+      player.hasCollided();
+      this.add.text(1, 1, 'Game Over');
+    }).bind(this))
+
+    this.physics.add.collider(this.player, this.asteroidChunks, ((player, asteroidChunk) => {
+      asteroidChunk.goBoom();
+      player.hasCollided();
+      this.add.text(1, 1, 'Game Over');
+    }).bind(this))
   }
 
   updateAsteroids() {
@@ -45,8 +76,8 @@ export default class GameScene extends Phaser.Scene {
       let asteroidX, asteroidY;
       let valid = false;
       while(!valid) {
-        asteroidX = Phaser.Math.Between(1, this.game.config.width);
-        asteroidY = Phaser.Math.Between(1, this.game.config.height);
+        asteroidX = Phaser.Math.Between(1, 2000);
+        asteroidY = Phaser.Math.Between(1, 1100);
         if (Phaser.Math.Distance.Between(asteroidX, asteroidY, this.player.x, this.player.y) > 100) valid = true;
       }
       this.asteroids.add(new Asteroid(this, asteroidX, asteroidY));
@@ -57,7 +88,6 @@ export default class GameScene extends Phaser.Scene {
     this.player.update();
     this.updateAsteroids();
     this.lastPlayerLaserShot++;
-    this.infoText = `${this.player.body.rotation}`;
     if (this.keys.W.isDown) {
       this.player.thrustForward();
     } else if (this.keys.S.isDown) {
