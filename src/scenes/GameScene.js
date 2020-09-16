@@ -1,5 +1,6 @@
 import 'phaser';
-import { GameObjects } from 'phaser';
+import { GameObjects, Math } from 'phaser';
+import Laser from '../game/Laser';
 import Player from '../game/Player';
 
 export default class GameScene extends Phaser.Scene {
@@ -19,6 +20,7 @@ export default class GameScene extends Phaser.Scene {
 
   create() {
     this.add.image(this.game.config.width * 0.5, this.game.config.height * 0.5, 'gameBg');
+    this.lastPlayerLaserShot = 0;
     
     console.log(this);
 
@@ -29,6 +31,7 @@ export default class GameScene extends Phaser.Scene {
       repeat: true,
     });
 
+    this.playerLasers = new Phaser.GameObjects.Group(this);
     this.player = new Player(this, this.game.config.width * 0.5, this.game.config.height * 0.5, 'mantisNoJet');
     this.keys = GameScene.generateKeys(this.input);
     this.cameras.main.startFollow(this.player);
@@ -36,6 +39,8 @@ export default class GameScene extends Phaser.Scene {
 
   update() {
     this.player.update();
+    this.lastPlayerLaserShot++;
+    console.log(this.lastPlayerLaserShot);
     this.infoText = `${this.player.body.rotation}`;
     if (this.keys.W.isDown) {
       this.player.thrustForward();
@@ -47,6 +52,14 @@ export default class GameScene extends Phaser.Scene {
       this.player.rotateRight();
     } else if (this.keys.A.isDown) {
       this.player.rotateLeft();
+    }
+
+    if (this.keys.SPACE.isDown) {
+      if (this.lastPlayerLaserShot >= this.player.getData('laserFrequency')) {
+        this.playerLasers.add(new Laser(this, this.player.x, this.player.y, 'greenLaser', 1500, (this.player.rotation - 3.14/2)));
+        this.lastPlayerLaserShot = 0;
+      }
+      
     }
   }
 }

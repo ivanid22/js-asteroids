@@ -71,13 +71,15 @@ export default class PreloaderScene extends Phaser.Scene {
 
     this.load.image('gameBg', 'assets/game-bg.png');
     this.load.spritesheet('mantisSprite', 'assets/mantis-spritesheet.png', { frameWidth: 78, startFrame: 1 });
+    this.load.image('redLaser', 'assets/red-laser.png');
+    this.load.image('greenLaser', 'assets/green-laser.png');
     this.load.image('flea', 'assets/flea.png');
     this.load.image('louse', 'assets/louse.png');
     this.load.image('mantisNoJet', 'assets/mantis-nojet.png');
   }
 
   create() {
-    
+
   }
 
   init() {
