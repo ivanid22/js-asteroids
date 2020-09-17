@@ -44,6 +44,12 @@ export default class Player extends Entity {
     this.body.angularVelocity += 150;
   }
 
+  create() {
+    this.on('animationcomplete', () => {
+      this.scene.gameOver();
+    }, this)
+  }
+
   update() {
     if (this.getData('hasCollided')) {
       if(!this.getData('hasPlayedDeathAnimation')) { 

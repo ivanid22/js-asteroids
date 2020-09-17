@@ -1,5 +1,5 @@
 {
-  "name": "phaser3-shooter",
+  "name": "js-asteroids",
   "author": "Ivan Diaz",
   "version": "1.0.0",
   "main": "index.js",
@@ -16,5 +16,9 @@
   },
   "dependencies": {
     "phaser": "^3.24.1"
+  },
+  "scripts": {
+    "build": "webpack --mode=production",
+    "start": "webpack-dev-server"
   }
 }
