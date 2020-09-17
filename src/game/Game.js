@@ -18,6 +18,6 @@ export default class Game extends Phaser.Game {
     this.scene.add('OptionsScene', OptionsScene);
     this.scene.add('CreditsScene', CreditsScene);
     this.scene.add('LeaderboardScene', LeaderboardScene);
-    this.scene.start('LeaderboardScene');
+    this.scene.start('Preload');
   }
 }

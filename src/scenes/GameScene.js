@@ -108,7 +108,8 @@ export default class GameScene extends Phaser.Scene {
   }
 
   gameOver() {
-    this.scene.pause();
+    if (this.game.globals.musicOn) this.sound.stopByKey('backgroundMusic');
+    this.scene.start('TitleScene');
   }
   
   update() {
