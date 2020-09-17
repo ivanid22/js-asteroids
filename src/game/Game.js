@@ -6,6 +6,7 @@ import gameGlobals from '../config/gameGlobals';
 import TitleSecene from '../scenes/TitleScene';
 import OptionsScene from '../scenes/OptionsScene';
 import CreditsScene from '../scenes/CreditsScene';
+import LeaderboardScene from '../scenes/LeaderboardScene';
 
 export default class Game extends Phaser.Game {
   constructor() {
@@ -16,6 +17,7 @@ export default class Game extends Phaser.Game {
     this.scene.add('TitleScene', TitleSecene);
     this.scene.add('OptionsScene', OptionsScene);
     this.scene.add('CreditsScene', CreditsScene);
-    this.scene.start('Preload');
+    this.scene.add('LeaderboardScene', LeaderboardScene);
+    this.scene.start('LeaderboardScene');
   }
 }
