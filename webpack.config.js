@@ -22,6 +22,13 @@ module.exports = {
             },
           },
        },
+       {
+        test: /\.(png|jpe?g|gif)$/i,
+        loader: 'file-loader',
+        options: {
+          outputPath: 'assets',
+        },
+      },
     ],
   },
   devServer: {
@@ -34,10 +41,6 @@ module.exports = {
           from: path.resolve(__dirname, 'index.html'), 
           to: path.resolve(__dirname, 'build'),
         },
-        {
-          from: path.resolve(__dirname, 'assets', '**', '*'),
-          to: path.resolve(__dirname, 'build')
-        }
       ],
     }),
     new webpack.DefinePlugin({

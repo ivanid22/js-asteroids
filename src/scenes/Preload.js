@@ -1,4 +1,11 @@
 import 'phaser';
+import asteroidChunkImg from '../../assets/asteroid-chunk.png';
+import asteroidImg from '../../assets/asteroid.png';
+import explosionImg from '../../assets/explosion.png';
+import gameBgImg from '../../assets/game-bg.png';
+import greenLaserImg from '../../assets/green-laser.png';
+import mantisNoJetImg from '../../assets/mantis-nojet.png';
+
 
 export default class PreloaderScene extends Phaser.Scene {
   constructor() {
@@ -69,16 +76,12 @@ export default class PreloaderScene extends Phaser.Scene {
 
     this.timedEvent = this.time.delayedCall(3000, this.ready, [], this);
 
-    this.load.image('gameBg', 'assets/game-bg.png');
-    this.load.spritesheet('mantisSprite', 'assets/mantis-spritesheet.png', { frameWidth: 78, startFrame: 1 });
-    this.load.spritesheet('explosionSprite', 'assets/explosion.png', { frameWidth: 196, frameHeight: 190 });
-    this.load.image('asteroid', 'assets/asteroid.png');
-    this.load.image('asteroidChunk', 'assets/asteroid-chunk.png');
-    this.load.image('redLaser', 'assets/red-laser.png');
-    this.load.image('greenLaser', 'assets/green-laser.png');
-    this.load.image('flea', 'assets/flea.png');
-    this.load.image('louse', 'assets/louse.png');
-    this.load.image('mantisNoJet', 'assets/mantis-nojet.png');
+    this.load.image('gameBg', gameBgImg);
+    this.load.spritesheet('explosionSprite', explosionImg, { frameWidth: 196, frameHeight: 190 });
+    this.load.image('asteroid', asteroidImg);
+    this.load.image('asteroidChunk', asteroidChunkImg);
+    this.load.image('greenLaser', greenLaserImg);
+    this.load.image('mantisNoJet', mantisNoJetImg);
   }
 
   create() {
