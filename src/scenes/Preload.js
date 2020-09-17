@@ -7,6 +7,11 @@ import greenLaserImg from '../../assets/green-laser.png';
 import mantisNoJetImg from '../../assets/mantis-nojet.png';
 import explosionSfx from '../../assets/explosion.wav';
 import laserSfx from '../../assets/laserfire01.ogg';
+import backgroundMusic from '../../assets/background-music.ogg';
+import blueButton1 from '../../assets/blue_button02.png';
+import blueButton2 from '../../assets/blue_button03.png';
+import checkedBox from '../../assets/blue_boxCheckmark.png';
+import box from '../../assets/grey_box.png';
 
 
 export default class PreloaderScene extends Phaser.Scene {
@@ -84,8 +89,13 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image('asteroidChunk', asteroidChunkImg);
     this.load.image('greenLaser', greenLaserImg);
     this.load.image('mantisNoJet', mantisNoJetImg);
+    this.load.image('blueButton1', blueButton1);
+    this.load.image('blueButton2', blueButton2);
+    this.load.image('box', box);
+    this.load.image('checkedBox', checkedBox);
     this.load.audio('explosionSfx', explosionSfx)
     this.load.audio('laserSfx', laserSfx);
+    this.load.audio('backgroundMusic', backgroundMusic);
   }
 
   create() {
@@ -101,6 +111,6 @@ export default class PreloaderScene extends Phaser.Scene {
     if (this.readyCount === 2) {
       this.scene.start('GameScene');
     }*/
-    this.scene.start('GameScene');
+    this.scene.start('TitleScene');
   }
 }

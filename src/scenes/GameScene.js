@@ -15,13 +15,15 @@ export default class GameScene extends Phaser.Scene {
       S: input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S),
       A: input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A),
       D: input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D),
+      ESC: input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC),
       SPACE: input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE),
     }
   }
 
   create() {
-    console.log(this.game.globals)
+    const { soundOn, musicOn } = this.game.globals;
     this.add.image(this.game.config.width * 0.5, this.game.config.height * 0.5, 'gameBg');
+    if (musicOn) this.sound.play('backgroundMusic', { loop: true });
     this.lastPlayerLaserShot = 0;
     this.chunksSpeed = 50;
     this.game.globals.score = 0;
@@ -63,26 +65,26 @@ export default class GameScene extends Phaser.Scene {
       this.asteroidChunks.add(new AsteroidChunk(this, asteroid.body.x, asteroid.body.y, 'asteroidChunk', this.chunksSpeed, this.chunksSpeed));
       this.asteroidChunks.add(new AsteroidChunk(this, asteroid.body.x, asteroid.body.y, 'asteroidChunk', this.chunksSpeed, -this.chunksSpeed));
       this.asteroidChunks.add(new AsteroidChunk(this, asteroid.body.x, asteroid.body.y, 'asteroidChunk', -this.chunksSpeed, -this.chunksSpeed));
-      this.sound.play('explosionSfx');
+      if (soundOn) this.sound.play('explosionSfx');
       asteroid.goBoom();
       this.game.globals.score += 10;
     }).bind(this))
 
     this.physics.add.collider(this.player, this.asteroids, ((player, asteroid) => {
       asteroid.goBoom();
-      this.sound.play('explosionSfx');
+      if (soundOn) this.sound.play('explosionSfx');
       player.hasCollided();
     }).bind(this))
 
     this.physics.add.collider(this.player, this.asteroidChunks, ((player, asteroidChunk) => {
       asteroidChunk.goBoom();
-      this.sound.play('explosionSfx');
+      if (soundOn) this.sound.play('explosionSfx');
       player.hasCollided();
     }).bind(this));
 
     this.physics.add.collider(this.playerLasers, this.asteroidChunks, ((laser, asteroidChunk) => {
       laser.destroy();
-      this.sound.play('explosionSfx');
+      if (soundOn) this.sound.play('explosionSfx');
       asteroidChunk.goBoom();
       this.game.globals.score += 5;
     }).bind(this));
@@ -130,9 +132,13 @@ export default class GameScene extends Phaser.Scene {
       if (this.lastPlayerLaserShot >= this.player.getData('laserFrequency')) {
         this.playerLasers.add(new Laser(this, this.player.x, this.player.y, 'greenLaser', 1500, (this.player.rotation - 3.14/2)));
         this.lastPlayerLaserShot = 0;
-        this.sound.play('laserSfx');
+        if(this.game.globals.soundOn) this.sound.play('laserSfx');
       }
-      
+    }
+
+    if (this.keys.ESC.isDown) {
+      this.sound.stopByKey('backgroundMusic');
+      this.scene.start('TitleScene');
     }
   }
 }

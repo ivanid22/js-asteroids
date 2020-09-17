@@ -3,6 +3,9 @@ import config from '../config/config';
 import GameScene from '../scenes/GameScene';
 import PreloadScene from '../scenes/Preload';
 import gameGlobals from '../config/gameGlobals';
+import TitleSecene from '../scenes/TitleScene';
+import OptionsScene from '../scenes/OptionsScene';
+import CreditsScene from '../scenes/CreditsScene';
 
 export default class Game extends Phaser.Game {
   constructor() {
@@ -10,6 +13,9 @@ export default class Game extends Phaser.Game {
     this.globals = gameGlobals;
     this.scene.add('Preload', PreloadScene);
     this.scene.add('GameScene', GameScene);
+    this.scene.add('TitleScene', TitleSecene);
+    this.scene.add('OptionsScene', OptionsScene);
+    this.scene.add('CreditsScene', CreditsScene);
     this.scene.start('Preload');
   }
 }
