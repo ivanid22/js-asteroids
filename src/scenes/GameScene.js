@@ -63,22 +63,26 @@ export default class GameScene extends Phaser.Scene {
       this.asteroidChunks.add(new AsteroidChunk(this, asteroid.body.x, asteroid.body.y, 'asteroidChunk', this.chunksSpeed, this.chunksSpeed));
       this.asteroidChunks.add(new AsteroidChunk(this, asteroid.body.x, asteroid.body.y, 'asteroidChunk', this.chunksSpeed, -this.chunksSpeed));
       this.asteroidChunks.add(new AsteroidChunk(this, asteroid.body.x, asteroid.body.y, 'asteroidChunk', -this.chunksSpeed, -this.chunksSpeed));
+      this.sound.play('explosionSfx');
       asteroid.goBoom();
       this.game.globals.score += 10;
     }).bind(this))
 
     this.physics.add.collider(this.player, this.asteroids, ((player, asteroid) => {
       asteroid.goBoom();
+      this.sound.play('explosionSfx');
       player.hasCollided();
     }).bind(this))
 
     this.physics.add.collider(this.player, this.asteroidChunks, ((player, asteroidChunk) => {
       asteroidChunk.goBoom();
+      this.sound.play('explosionSfx');
       player.hasCollided();
     }).bind(this));
 
     this.physics.add.collider(this.playerLasers, this.asteroidChunks, ((laser, asteroidChunk) => {
       laser.destroy();
+      this.sound.play('explosionSfx');
       asteroidChunk.goBoom();
       this.game.globals.score += 5;
     }).bind(this));
@@ -126,6 +130,7 @@ export default class GameScene extends Phaser.Scene {
       if (this.lastPlayerLaserShot >= this.player.getData('laserFrequency')) {
         this.playerLasers.add(new Laser(this, this.player.x, this.player.y, 'greenLaser', 1500, (this.player.rotation - 3.14/2)));
         this.lastPlayerLaserShot = 0;
+        this.sound.play('laserSfx');
       }
       
     }

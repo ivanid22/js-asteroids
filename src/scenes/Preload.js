@@ -5,6 +5,8 @@ import explosionImg from '../../assets/explosion.png';
 import gameBgImg from '../../assets/game-bg.png';
 import greenLaserImg from '../../assets/green-laser.png';
 import mantisNoJetImg from '../../assets/mantis-nojet.png';
+import explosionSfx from '../../assets/explosion.wav';
+import laserSfx from '../../assets/laserfire01.ogg';
 
 
 export default class PreloaderScene extends Phaser.Scene {
@@ -82,6 +84,8 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image('asteroidChunk', asteroidChunkImg);
     this.load.image('greenLaser', greenLaserImg);
     this.load.image('mantisNoJet', mantisNoJetImg);
+    this.load.audio('explosionSfx', explosionSfx)
+    this.load.audio('laserSfx', laserSfx);
   }
 
   create() {
