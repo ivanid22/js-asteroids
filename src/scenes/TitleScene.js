@@ -1,10 +1,10 @@
-import "phaser";
-import config from "../config/config";
+import Phaser from 'phaser';
+import config from '../config/config';
 import Button from '../controls/Button';
 
 export default class TitleSecene extends Phaser.Scene {
   constructor() {
-    super("TitleScene");
+    super('TitleScene');
   }
 
   create() {
@@ -14,25 +14,25 @@ export default class TitleSecene extends Phaser.Scene {
     this.creditsButton = new Button(this, config.width/2, config.height/2 + 100, 'blueButton1', 'blueButton2', 'Credits', 'CreditsScene');
 
     this.creditsButton.on(
-      "pointerdown",
-      function () {
-        this.scene.start("GameScene");
-      }.bind(this)
+      'pointerdown',
+      () => {
+        this.scene.start('GameScene');
+      }
     );
 
     this.gameButton.on(
-      "pointerdown",
+      'pointerdown',
       function () {
-        this.scene.start("GameScene");
+        this.scene.start('GameScene');
       }.bind(this)
     );
 
-    this.input.on("pointerover", function (event, gameObjects) {
-      gameObjects[0].setTexture("blueButton2");
+    this.input.on('pointerover', function (event, gameObjects) {
+      gameObjects[0].setTexture('blueButton2');
     });
 
-    this.input.on("pointerout", function (event, gameObjects) {
-      gameObjects[0].setTexture("blueButton1");
+    this.input.on('pointerout', function (event, gameObjects) {
+      gameObjects[0].setTexture('blueButton1');
     });
   }
 

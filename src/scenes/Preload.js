@@ -1,4 +1,4 @@
-import 'phaser';
+import Phaser from 'phaser';
 import asteroidChunkImg from '../../assets/asteroid-chunk.png';
 import asteroidImg from '../../assets/asteroid.png';
 import explosionImg from '../../assets/explosion.png';

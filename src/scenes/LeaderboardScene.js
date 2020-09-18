@@ -1,4 +1,4 @@
-import 'phaser';
+import Phaser from 'phaser';
 import axios from 'axios';
 import { scoresApiData } from '../config/config';
 
@@ -8,10 +8,9 @@ export default class LeaderboardScene extends Phaser.Scene {
   }
 
   fetchApiData() {
-    const {API_URL, GAME_ID} = scoresApiData;
+    const { API_URL, GAME_ID } = scoresApiData;
     const requestUrl = `${API_URL}/games/${GAME_ID}/scores/`;
     axios.get(requestUrl).then((response) => {
-      console.log(response.data.result);
       this.displayLeaderboardData(response.data.result)
     }).catch((error) => {
       console.log(error.message);
