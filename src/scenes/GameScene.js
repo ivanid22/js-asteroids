@@ -122,6 +122,11 @@ export default class GameScene extends Phaser.Scene {
   gameOver() {
     if (this.game.globals.musicOn) this.sound.stopByKey('backgroundMusic');
     this.game.globals.finalScore = this.scoreTracker.getScore();
+    this.input.keyboard.removeCapture(Phaser.Input.Keyboard.KeyCodes.W);
+    this.input.keyboard.removeCapture(Phaser.Input.Keyboard.KeyCodes.S);
+    this.input.keyboard.removeCapture(Phaser.Input.Keyboard.KeyCodes.A);
+    this.input.keyboard.removeCapture(Phaser.Input.Keyboard.KeyCodes.D);
+    this.input.keyboard.removeCapture(Phaser.Input.Keyboard.KeyCodes.SPACE);
     this.scene.start('GameOverScene');
   }
 

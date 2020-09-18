@@ -32,7 +32,7 @@ const ScoreApi = (() => {
     ts = trimScores(ts);
     if (ts.length > count) ts = ts.splice(count, ts.length - count);
     return ts;
-  }
+  };
 
   const postScore = (user, score) => new Promise((resolve, reject) => {
     const requestUrl = `${API_URL}/games/${GAME_ID}/scores/`;
