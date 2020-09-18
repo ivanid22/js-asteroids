@@ -2,11 +2,9 @@ import ScoreApi from '../game/ScoreApi';
 
 describe('ScoreApi', () => {
   describe('getScores', () => {
-    it('should retrieve score data from remote API', () => {
-      return ScoreApi.getScores().then((scores) => {
-        expect(scores.length).toBeGreaterThan(0);
-      });
-    });
+    it('should retrieve score data from remote API', () => ScoreApi.getScores().then((scores) => {
+      expect(scores.length).toBeGreaterThan(0);
+    }));
   });
 
   describe('sortScores', () => {
@@ -26,11 +24,9 @@ describe('ScoreApi', () => {
   });
 
   describe('postScore', () => {
-    it('should send a score to the API', () => {
-      return ScoreApi.postScore('test', -1).then((response) => {
-        expect(response).toEqual('Leaderboard score created correctly.');
-      });
-    });
+    it('should send a score to the API', () => ScoreApi.postScore('test', -1).then((response) => {
+      expect(response).toEqual('Leaderboard score created correctly.');
+    }));
   });
 
   describe('trimScores', () => {

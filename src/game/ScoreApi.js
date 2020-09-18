@@ -14,7 +14,7 @@ const ScoreApi = (() => {
   });
 
   const sortScores = (scores) => scores.sort((a, b) => {
-    if (a.score < b.score) return -1;
+    if (a.score > b.score) return -1;
     if (b.score < a.score) return 1;
     return 0;
   });
@@ -26,6 +26,13 @@ const ScoreApi = (() => {
     });
     return trimmedScores;
   };
+
+  const topScores = (count, scores) => {
+    let ts = sortScores(scores);
+    ts = trimScores(ts);
+    if (ts.length > count) ts = ts.splice(count, ts.length - count);
+    return ts;
+  }
 
   const postScore = (user, score) => new Promise((resolve, reject) => {
     const requestUrl = `${API_URL}/games/${GAME_ID}/scores/`;
@@ -41,6 +48,7 @@ const ScoreApi = (() => {
     sortScores,
     postScore,
     trimScores,
+    topScores,
   };
 })();
 

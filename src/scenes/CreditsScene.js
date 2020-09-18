@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import config from '../config/config';
+import Button from '../controls/Button';
 
 export default class CreditsScene extends Phaser.Scene {
   constructor() {
@@ -7,6 +8,7 @@ export default class CreditsScene extends Phaser.Scene {
   }
 
   create() {
+    const { width, height } = this.game.config;
     this.creditsText = this.add.text(0, 0, 'Credits', { fontSize: '32px', fill: '#fff' });
     this.madeByText = this.add.text(0, 0, 'Created By: Ivan Diaz', { fontSize: '26px', fill: '#fff' });
     this.zone = this.add.zone(config.width / 2, config.height / 2, config.width, config.height);
@@ -22,6 +24,7 @@ export default class CreditsScene extends Phaser.Scene {
     );
 
     this.madeByText.setY(1000);
+    this.menuButton = new Button(this, width / 2, height - 100, 'blueButton1', 'blueButton2', 'Menu', 'TitleScene');
 
     this.creditsTween = this.tweens.add({
       targets: this.creditsText,

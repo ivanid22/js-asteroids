@@ -121,7 +121,8 @@ export default class GameScene extends Phaser.Scene {
 
   gameOver() {
     if (this.game.globals.musicOn) this.sound.stopByKey('backgroundMusic');
-    this.scene.start('TitleScene');
+    this.game.globals.finalScore = this.scoreTracker.getScore();
+    this.scene.start('GameOverScene');
   }
 
   update() {

@@ -1,0 +1,22 @@
+#game-container {
+  position: relative;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+#playerNameTextBox {
+  position: absolute;
+  top: 235px;
+  left: 175px;
+  min-width: 300px;
+  height: 40px;
+  border-style: none;
+  background-color: black;
+  color: white;
+  font-size: 2em;
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
