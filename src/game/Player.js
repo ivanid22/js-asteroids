@@ -1,4 +1,4 @@
-import 'phaser';
+import Phaser from 'phaser';
 import Entity from './Entity';
 
 export default class Player extends Entity {
@@ -18,8 +18,8 @@ export default class Player extends Entity {
     const speedY = speed * Math.sin(angle);
     return {
       speedX,
-      speedY
-    }
+      speedY,
+    };
   }
 
   hasCollided() {
@@ -28,7 +28,7 @@ export default class Player extends Entity {
 
   thrustForward() {
     const currentSpeed = this.getData('speed');
-    if (currentSpeed <= this.getData('maxSpeed')) this.setData('speed', currentSpeed + 4)
+    if (currentSpeed <= this.getData('maxSpeed')) this.setData('speed', currentSpeed + 4);
   }
 
   thrustBackward() {
@@ -47,19 +47,19 @@ export default class Player extends Entity {
   create() {
     this.on('animationcomplete', () => {
       this.scene.gameOver();
-    }, this)
+    }, this);
   }
 
   update() {
     if (this.getData('hasCollided')) {
-      if(!this.getData('hasPlayedDeathAnimation')) { 
+      if (!this.getData('hasPlayedDeathAnimation')) {
         this.play('explosionAnimation', true);
         this.setData('hasPlayedDeathAnimation', true);
       }
       this.body.setVelocity(0);
       this.body.setAngularVelocity(0);
     } else {
-      const { speedX, speedY  } = Player.calcSpeedComponents(this.rotation - (Math.PI / 2), this.data.get('speed'));
+      const { speedX, speedY } = Player.calcSpeedComponents(this.rotation - (Math.PI / 2), this.data.get('speed'));
       this.body.setVelocityX(speedX);
       this.body.setVelocityY(speedY);
       this.body.setAngularVelocity(0);

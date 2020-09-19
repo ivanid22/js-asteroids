@@ -9,10 +9,11 @@ export default class TitleSecene extends Phaser.Scene {
 
   create() {
     this.add.image(this.game.config.width * 0.5, this.game.config.height * 0.5, 'gameBg');
-    this.gameButton = new Button(this, config.width / 2, config.height / 2 - 100, 'blueButton1', 'blueButton2', 'Play', 'GameScene');
-    this.optionsButton = new Button(this, config.width / 2, config.height / 2, 'blueButton1', 'blueButton2', 'Options', 'OptionsScene');
-    this.creditsButton = new Button(this, config.width / 2, config.height / 2 + 100, 'blueButton1', 'blueButton2', 'Credits', 'CreditsScene');
-    this.leaderboardButton = new Button(this, config.width / 2, config.height / 2 + 200, 'blueButton1', 'blueButton2', 'Scores', 'LeaderboardScene');
+    this.gameButton = new Button(this, config.width / 2, config.height / 2 - 200, 'blueButton1', 'blueButton2', 'Play', 'GameScene');
+    this.optionsButton = new Button(this, config.width / 2, config.height / 2 - 100, 'blueButton1', 'blueButton2', 'Options', 'OptionsScene');
+    this.creditsButton = new Button(this, config.width / 2, config.height / 2, 'blueButton1', 'blueButton2', 'Credits', 'CreditsScene');
+    this.leaderboardButton = new Button(this, config.width / 2, config.height / 2 + 100, 'blueButton1', 'blueButton2', 'Scores', 'LeaderboardScene');
+    this.instructionsButton = new Button(this, config.width / 2, config.height / 2 + 200, 'blueButton1', 'blueButton2', 'Controls', 'InstructionsScene');
 
     this.creditsButton.on(
       'pointerdown',
