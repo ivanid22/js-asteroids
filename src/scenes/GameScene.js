@@ -16,6 +16,10 @@ export default class GameScene extends Phaser.Scene {
       S: input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S),
       A: input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A),
       D: input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D),
+      UP: input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP),
+      DOWN: input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN),
+      LEFT: input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT),
+      RIGHT: input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT),
       ESC: input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC),
       SPACE: input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE),
     };
@@ -135,15 +139,15 @@ export default class GameScene extends Phaser.Scene {
     this.updateAsteroids();
     this.updateScoreText();
     this.lastPlayerLaserShot += 1;
-    if (this.keys.W.isDown) {
+    if (this.keys.W.isDown || this.keys.UP.isDown) {
       this.player.thrustForward();
-    } else if (this.keys.S.isDown) {
+    } else if (this.keys.S.isDown || this.keys.DOWN.isDown) {
       this.player.thrustBackward();
     }
 
-    if (this.keys.D.isDown) {
+    if (this.keys.D.isDown || this.keys.RIGHT.isDown) {
       this.player.rotateRight();
-    } else if (this.keys.A.isDown) {
+    } else if (this.keys.A.isDown || this.keys.LEFT.isDown) {
       this.player.rotateLeft();
     }
 

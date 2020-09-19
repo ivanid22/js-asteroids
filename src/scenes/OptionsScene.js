@@ -19,16 +19,15 @@ export default class OptionsScene extends Phaser.Scene {
 
     this.menuButton = new Button(this, 400, 500, 'blueButton1', 'blueButton2', 'Menu', 'TitleScene');
 
-    this.musicButton.on('pointerdown', function () {
-      this.game.globals.musicOn = !this.game.globals.musicOn
+    this.musicButton.on('pointerdown', () => {
+      this.game.globals.musicOn = !this.game.globals.musicOn;
       this.updateAudio();
-    }.bind(this));
+    });
 
-    this.soundButton.on('pointerdown', function() {
-      console.log(this.game.globals.soundOn);
+    this.soundButton.on('pointerdown', () => {
       this.game.globals.soundOn = !this.game.globals.soundOn;
       this.updateAudio();
-    }.bind(this));
+    });
 
     this.updateAudio();
   }
@@ -41,9 +40,9 @@ export default class OptionsScene extends Phaser.Scene {
     }
 
     if (!this.game.globals.soundOn) {
-        this.soundButton.setTexture('box');
-      } else {
-        this.soundButton.setTexture('checkedBox');
+      this.soundButton.setTexture('box');
+    } else {
+      this.soundButton.setTexture('checkedBox');
     }
   }
 }

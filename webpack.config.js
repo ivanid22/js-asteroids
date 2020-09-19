@@ -1,4 +1,4 @@
-const copyWebpackPlugin = require('copy-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
 
@@ -39,10 +39,10 @@ module.exports = {
     contentBase: path.resolve(__dirname, 'build'),
   },
   plugins: [
-    new copyWebpackPlugin({
+    new CopyWebpackPlugin({
       patterns: [
-        { 
-          from: path.resolve(__dirname, 'index.html'), 
+        {
+          from: path.resolve(__dirname, 'index.html'),
           to: path.resolve(__dirname, 'build'),
         },
       ],

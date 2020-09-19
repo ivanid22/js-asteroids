@@ -20,13 +20,12 @@ export default class PreloaderScene extends Phaser.Scene {
   }
 
   preload() {
-    let progressBar = this.add.graphics();
-    let progressBox = this.add.graphics();
+    const progressBar = this.add.graphics();
+    const progressBox = this.add.graphics();
     progressBox.fillStyle(0x222222, 0.8);
     progressBox.fillRect(240, 270, 320, 50);
 
-    const width = this.cameras.main.width;
-    const height = this.cameras.main.height;
+    const { width, height } = this.cameras.main;
 
     const loadingText = this.make.text({
       x: width / 2,
@@ -34,8 +33,8 @@ export default class PreloaderScene extends Phaser.Scene {
       text: '0%',
       style: {
         font: '18px monospace',
-        fill: '#ffffff'
-      }
+        fill: '#ffffff',
+      },
     });
     loadingText.setOrigin(0.5, 0.5);
 
@@ -61,25 +60,25 @@ export default class PreloaderScene extends Phaser.Scene {
     });
     assetText.setOrigin(0.5, 0.5);
 
-    this.load.on('progress', function(value) {
-      percentText.setText(parseInt(value * 100) + '%');
+    this.load.on('progress', (value) => {
+      percentText.setText(`${parseInt(value * 100, 10)}%`);
       progressBar.clear();
       progressBar.fillStyle(0xffffff, 1);
       progressBar.fillRect(250, 280, 300 * value, 30);
     });
 
-    this.load.on('fileprogress', function(file) {
+    this.load.on('fileprogress', (file) => {
       assetText.setText(`Loading asset: ${file.key}`);
     });
 
-    this.load.on('complete', function () {
+    this.load.on('complete', () => {
       progressBar.destroy();
       progressBox.destroy();
       loadingText.destroy();
       percentText.destroy();
       assetText.destroy();
       this.ready();
-    }.bind(this));
+    });
 
     this.timedEvent = this.time.delayedCall(3000, this.ready, [], this);
 
@@ -93,13 +92,9 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image('blueButton2', blueButton2);
     this.load.image('box', box);
     this.load.image('checkedBox', checkedBox);
-    this.load.audio('explosionSfx', explosionSfx)
+    this.load.audio('explosionSfx', explosionSfx);
     this.load.audio('laserSfx', laserSfx);
     this.load.audio('backgroundMusic', backgroundMusic);
-  }
-
-  create() {
-
   }
 
   init() {
@@ -107,10 +102,10 @@ export default class PreloaderScene extends Phaser.Scene {
   }
 
   ready() {
-    /*this.readyCount++;
+    this.readyCount += 1;
     if (this.readyCount === 2) {
       this.scene.start('GameScene');
-    }*/
+    }
     this.scene.start('TitleScene');
   }
 }

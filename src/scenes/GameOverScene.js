@@ -7,7 +7,6 @@ export default class GameOverScene extends Phaser.Scene {
   }
 
   displayFields() {
-    const { width, heigth } = this.game.config;
     this.add.text(1, 1, 'Congratulations! You got a high score!\nType your name and press enter');
     this.inputField.classList.remove('hidden');
     this.inputField.focus();
@@ -38,8 +37,8 @@ export default class GameOverScene extends Phaser.Scene {
       if (!this.scoreWasSent) {
         ScoreApi.postScore(this.inputField.value, this.finalScore).then(() => {
           this.scene.start('LeaderboardScene');
-        }).catch((error) => {
-          console.log(error);
+        }).catch(() => {
+          this.scene.start('TitleScene');
         });
       }
       this.scoreWasSent = true;
