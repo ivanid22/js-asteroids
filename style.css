@@ -1,3 +1,7 @@
+body {
+  background-color: #0c0c0c;
+}
+
 #game-container {
   position: relative;
   max-width: 980px;
