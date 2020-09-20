@@ -30,7 +30,7 @@ const ScoreApi = (() => {
   const topScores = (count, scores) => {
     let ts = sortScores(scores);
     ts = trimScores(ts);
-    if (ts.length > count) ts = ts.splice(count, ts.length - count);
+    if (ts.length > count) ts.splice(count, ts.length - count);
     return ts;
   };
 

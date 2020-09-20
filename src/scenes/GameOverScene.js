@@ -7,7 +7,10 @@ export default class GameOverScene extends Phaser.Scene {
   }
 
   displayFields() {
-    this.add.text(1, 1, 'Congratulations! You got a high score!\nType your name and press enter');
+    const { width, height } = this.game.config;
+    const displayZone = this.add.zone(width / 2, height / 2, width, height);
+    const headerText = this.add.text(1, 1, 'Congratulations! You got a high score!\nType your name and press enter', { fontSize: 20 });
+    Phaser.Display.Align.In.Center(headerText, displayZone, 0, -200);
     this.inputField.classList.remove('hidden');
     this.inputField.focus();
   }

@@ -1,1 +1,1 @@
-## js-invaders
+## jsAsteroids

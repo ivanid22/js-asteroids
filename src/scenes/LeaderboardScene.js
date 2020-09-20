@@ -15,7 +15,7 @@ export default class LeaderboardScene extends Phaser.Scene {
     this.header = this.add.text(1, 1, 'Top 10 Leaderboard', { fontSize: 40 });
     this.scores = this.add.text(1, 1, displayStr, { lineSpacing: 20 });
     Phaser.Display.Align.In.Center(this.header, this.textZone, 0, -250);
-    Phaser.Display.Align.In.Center(this.scores, this.textZone, 0);
+    Phaser.Display.Align.In.Center(this.scores, this.textZone, 0, -50);
   }
 
   create() {
