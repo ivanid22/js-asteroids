@@ -13,11 +13,20 @@ const ScoreApi = (() => {
     });
   });
 
-  const sortScores = (scores) => scores.sort((a, b) => {
-    if (a.score > b.score) return -1;
-    if (b.score < a.score) return 1;
-    return 0;
-  });
+  const sortScores = (arry) => {
+    const len = arry.length;
+    const arr = [...arry];
+    for (let i = 0; i < len; i += 1) {
+      for (let j = 0; j < len - i - 1; j += 1) {
+        if (arr[j].score > arr[j + 1].score) {
+          const temp = arr[j];
+          arr[j] = arr[j + 1];
+          arr[j + 1] = temp;
+        }
+      }
+    }
+    return [...arr].reverse();
+  };
 
   const trimScores = (scores) => {
     const trimmedScores = [];

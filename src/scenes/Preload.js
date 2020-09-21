@@ -13,7 +13,6 @@ import blueButton2 from '../../assets/blue_button03.png';
 import checkedBox from '../../assets/blue_boxCheckmark.png';
 import box from '../../assets/grey_box.png';
 
-
 export default class PreloaderScene extends Phaser.Scene {
   constructor() {
     super('Preload');
