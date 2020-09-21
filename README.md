@@ -4,6 +4,9 @@ A javascript arcade space-shooter made on Phaser 3.
 
 ![game demo](/assets/jsAsteroidsDemo.gif)
 
+# Live version
+You can find a live version of the game [here](https://js-asteroids.netlify.app/)
+
 ## Overview
 jsAsteroids is a real-time shooting game with an overhead view. The objective of the game is to destroy as many asteroids as possible without getting hit by debris, or crashing into obstacles.
 
