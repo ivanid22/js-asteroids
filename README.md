@@ -46,4 +46,23 @@ Once that's done, run the command
 ## Acknowledgements and credits
 This game uses 100% free and open assets thanks to the community over at [OpenGameArt](https://opengameart.org/). Here are the authors of the assets used in this game:
 
-- 
+- [Triki Minut](https://opengameart.org/users/triki-minut), Laser sound FX.
+- [TinyWorlds](https://opengameart.org/users/tinyworlds), Explosion sound Fx.
+- [Jan125](https://opengameart.org/users/jan125), Game music.
+- [Tatermand](https://opengameart.org/users/tatermand), Game sprites and background
+- [Bleed](https://opengameart.org/users/bleed), Explosion animation.
+- [Rawdanitsu](https://opengameart.org/users/rawdanitsu), Laser sprite.
+
+## Author
+
+**Ivan Diaz**
+
+- Github: [@ivanid22](https://github.com/ivanid22)
+- Twitter: [@ivanid22](https://twitter.com/ivanid22)
+- Linkedin: [Ivan Diaz](https://www.linkedin.com/in/ivanid22)
+
+## Contributing
+
+Contributions, issues, and feature requests are welcome!
+
+Feel free to check the [issues page](issues/).
