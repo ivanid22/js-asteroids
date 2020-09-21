@@ -80,7 +80,7 @@ export default class PreloaderScene extends Phaser.Scene {
       this.ready();
     });
 
-    this.timedEvent = this.time.delayedCall(3000, this.ready, [], this);
+    this.timedEvent = this.time.delayedCall(1500, this.ready, [], this);
 
     this.load.image('gameBg', gameBgImg);
     this.load.spritesheet('explosionSprite', explosionImg, { frameWidth: 196, frameHeight: 190 });
@@ -104,8 +104,7 @@ export default class PreloaderScene extends Phaser.Scene {
   ready() {
     this.readyCount += 1;
     if (this.readyCount === 2) {
-      this.scene.start('GameScene');
+      this.scene.start('TitleScene');
     }
-    this.scene.start('TitleScene');
   }
 }
