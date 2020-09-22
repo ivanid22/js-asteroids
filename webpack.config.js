@@ -1,4 +1,4 @@
-const copyWebpackPlugin = require('copy-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
 
@@ -12,32 +12,40 @@ module.exports = {
   },
   module: {
     rules: [
-       {
-          test: /\.js$/,
-          include: path.resolve(__dirname, 'src/'),
-          use: {
-            loader: 'babel-loader',
-            options: {
-              presets: ['@babel/preset-env'],
-            },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.js$/,
+        include: path.resolve(__dirname, 'src/'),
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
           },
-       },
+        },
+      },
+      {
+        test: /\.(png|jpe?g|gif|ogg|wav|mp3)$/i,
+        loader: 'file-loader',
+        options: {
+          outputPath: 'assets',
+        },
+      },
     ],
   },
   devServer: {
     contentBase: path.resolve(__dirname, 'build'),
+    open: true,
   },
   plugins: [
-    new copyWebpackPlugin({
+    new CopyWebpackPlugin({
       patterns: [
-        { 
-          from: path.resolve(__dirname, 'index.html'), 
+        {
+          from: path.resolve(__dirname, 'index.html'),
           to: path.resolve(__dirname, 'build'),
         },
-        {
-          from: path.resolve(__dirname, 'assets', '**', '*'),
-          to: path.resolve(__dirname, 'build')
-        }
       ],
     }),
     new webpack.DefinePlugin({
