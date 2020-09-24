@@ -8,6 +8,7 @@ export default class Laser extends Entity {
 
     const { speedX, speedY } = Player.calcSpeedComponents(angle, speed);
     this.body.angle = angle;
+    this.rotation = angle - (Math.PI / 2);
     this.body.setVelocityX(speedX);
     this.body.setVelocityY(speedY);
   }
