@@ -12,4 +12,14 @@ export default class Laser extends Entity {
     this.body.setVelocityX(speedX);
     this.body.setVelocityY(speedY);
   }
+
+  update() {
+    const camera = this.scene.cameras.main;
+    if (this.y > (camera.midPoint.y + camera.height / 2)
+        || this.y < (camera.midPoint.y - camera.height / 2)
+        || this.x > (camera.midPoint.x + camera.width / 2)
+        || this.x < (camera.midPoint.x - camera.width / 2)) {
+      this.destroy();
+    }
+  }
 }

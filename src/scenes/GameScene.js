@@ -123,6 +123,12 @@ export default class GameScene extends Phaser.Scene {
     }
   }
 
+  updateLasers() {
+    this.playerLasers.children.entries.forEach((laser) => {
+      laser.update();
+    });
+  }
+
   gameOver() {
     if (this.game.globals.musicOn) this.sound.stopByKey('backgroundMusic');
     this.game.globals.finalScore = this.scoreTracker.getScore();
@@ -137,6 +143,7 @@ export default class GameScene extends Phaser.Scene {
   update() {
     this.player.update();
     this.updateAsteroids();
+    this.updateLasers();
     this.updateScoreText();
     this.lastPlayerLaserShot += 1;
     if (this.keys.W.isDown || this.keys.UP.isDown) {
