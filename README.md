@@ -42,6 +42,9 @@ Now you need to open a terminal and navigate to the project's directory. Once th
 Once that's done, run the command 
 `npm run start`. That should open a new browser window with the game. If the browser does not open, do it manually, paste this on the url box: `localhost:8080`, and press enter.
 
+### Running tests
+Open a console on the base directory for the project and run the command `npm test`
+
 ## Requirements
 - Node.js ^12.18
 - npm ^6.14
